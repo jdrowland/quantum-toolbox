@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# macOS
+.DS_Store
+._*
+
+# Experiments (large data)
+experiments/
+
+# Development
+*.lprof
+*.log
+
+# Root-level scripts and docs (not part of core package)
+compare_*.py
+demo_*.py
+plot_*.py
+test_*.py
+examples/
+tests/
+*.txt
+HERMITIANIZATION.md
+STATUS.md
+VARIANCE_VALIDATION.md
+
+# Claude Code config
+.claude/
