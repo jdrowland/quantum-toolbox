@@ -181,11 +181,16 @@ class PauliString:
             pauli2 = 2 * z2 + x2
 
             # Phase table: phases[p1][p2] gives i^k for P1*P2 = i^k * P3
+            # Encoding: 2*z + x maps to I=0, X=1, Z=2, Y=3
+            # From matrix multiplication:
+            # I*P = P,      X*I=X,  X*X=I,   X*Z=-iY, X*Y=iZ
+            # Z*I=Z, Z*X=iY, Z*Z=I, Z*Y=-iX
+            # Y*I=Y, Y*X=-iZ, Y*Z=iX, Y*Y=I
             phases = [
                 [0, 0, 0, 0],   # I * {I,X,Z,Y}
-                [0, 0, 1, 3],   # X * {I,X,Z,Y} -> {X, I, iY, -iZ}
-                [0, 3, 0, 1],   # Z * {I,X,Z,Y} -> {Z, -iY, I, iX}
-                [0, 1, 3, 0]    # Y * {I,X,Z,Y} -> {Y, iZ, -iX, I}
+                [0, 0, 3, 1],   # X * {I,X,Z,Y} -> {X, I, -iY, iZ}
+                [0, 1, 0, 3],   # Z * {I,X,Z,Y} -> {Z, iY, I, -iX}
+                [0, 3, 1, 0]    # Y * {I,X,Z,Y} -> {Y, -iZ, iX, I}
             ]
             power += phases[pauli1][pauli2]
 
