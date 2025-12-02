@@ -9,9 +9,11 @@ import cirq
 import openfermion as of
 from quimb.tensor.tensor_1d import MatrixProductState
 
-# Import kcommute2 for MPO-based variance
-sys.path.insert(0, '/mnt/ffs24/home/rowlan91/kcommute2')
-from kcommute.tensor_nets import pauli_sum_to_mpo, mpo_mps_exepctation
+# # Import kcommute2 for MPO-based variance
+# sys.path.insert(0, '/mnt/ffs24/home/rowlan91/kcommute2')
+# from kcommute.tensor_nets import pauli_sum_to_mpo, mpo_mps_exepctation
+from qtoolbox.converters.quimb_bridge import pauli_sum_to_mpo
+from qtoolbox.core.tensors import mpo_mps_exepctation
 
 from qtoolbox.core.group import GroupCollection
 from qtoolbox.core.pauli import PauliString
