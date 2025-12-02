@@ -1,3 +1,5 @@
+"""Convert objects to quimb MPOs."""
+
 from typing import List, Optional
 import numpy as np
 import cirq
@@ -8,7 +10,14 @@ from qtoolbox.core.pauli import PauliString
 from qtoolbox.converters.cirq_bridge import to_cirq
 
 def pauli_string_to_mpo(pstring: cirq.PauliString, qs: List[cirq.Qid]) -> MatrixProductOperator:
-    """Convert a Pauli string to a matrix product operator."""
+    """Convert a Pauli string to a matrix product operator.
+    
+    Arguments:
+    pstring - Pauli string to convert.
+    qs - All the qs we want the MPO to have. The qubits of pstring should be a subset.
+    
+    Returns:
+    The Pauli string as an MPO."""
 
     # Make a list of matrices for each operator in the string.
     ps_dense = pstring.dense(qs)
@@ -38,7 +47,12 @@ def pauli_string_to_mpo(pstring: cirq.PauliString, qs: List[cirq.Qid]) -> Matrix
 
 
 def pauli_sum_to_mpo(psum: cirq.PauliSum, qs: List[cirq.Qid], max_bond: int) -> MatrixProductOperator:
-    """Convert a Pauli sum to an MPO."""
+    """Convert a Pauli sum to an MPO.
+    
+    Arguments:
+    psum - The operator to be converted.
+    qs - All the qubits we want to have support over. The qubits of psum should be a subset of these.
+    max_bond - The maximum bond dimension of the MPO. Compression will be applied as needed."""
 
     if len(psum) == 0:
         raise ValueError("Paulisum passed has no terms.")
@@ -53,7 +67,15 @@ def pauli_sum_to_mpo(psum: cirq.PauliSum, qs: List[cirq.Qid], max_bond: int) -> 
 
 
 def to_quimb(pauli: PauliString, qs: Optional[List[cirq.Qid]]=None) -> MatrixProductOperator:
-    """Convert a PauliString to an MPO."""
+    """Convert a PauliString to an MPO.
+    
+    Arguments:
+    pauli - the PauliString (from this library) to be converted.
+    qs - All the (cirq) qubits we want the mpo to act on. If None is passed, the appropriate
+    number of cirq.LineQubits will be used.
+    
+    Returns:
+    The Pauli string as an MPO."""
 
     if qs is None:
         qs = cirq.LineQubit.range(pauli.n_qubits)
