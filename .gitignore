@@ -29,3 +29,5 @@ VARIANCE_VALIDATION.md
 
 # Claude Code config
 .claude/
+
+quantum_toolbox.egg-info/
